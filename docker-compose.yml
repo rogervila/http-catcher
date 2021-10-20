@@ -5,5 +5,7 @@ services:
     restart: always
     ports:
       - "5000:5000"
+    # environment:
+    #   RESPONSE_STATUS: 201
     build:
       context: .

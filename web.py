@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify
 from json import dumps
 from logging.config import dictConfig
+from os import environ
+from flask import Flask, Response, request
 
 # https://stackoverflow.com/a/56998012/3333549
 dictConfig({
@@ -45,4 +46,8 @@ def catch(path):
     app.logger.debug(dumps(data, indent=2, sort_keys=True))
     # pylint: enable=no-member
 
-    return jsonify(data)
+    return Response(
+        dumps(data),
+        status=environ.get('RESPONSE_STATUS') or 200,
+        mimetype=environ.get('RESPONSE_MIME') or 'application/json'
+    )
