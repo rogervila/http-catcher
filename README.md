@@ -3,7 +3,6 @@
 <p align="center"><img height="200" alt="HTTPCatcher" src="https://image.flaticon.com/icons/png/512/2580/2580470.png" /></p>
 
 <p align="center">
-  <a href="https://hub.docker.com/r/rogervila/http-catcher"><img alt="DockerHub Downloads" src="https://img.shields.io/docker/pulls/rogervila/http-catcher.svg" /></a>
   <a href="https://github.com/rogervila/http-catcher/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/rogervila/http-catcher" /></a>
 </p>
 
@@ -13,10 +12,10 @@ Running HTTPCatcher with docker is easy, but you can also run it locally.
 
 ### Docker setup
 
-The image is available on DockerHub.
+The image is available on [ghcr.io](https://ghcr.io).
 
 ```sh
-docker run -p 5000:5000 rogervila/http-catcher
+docker run -p 5000:5000 ghcr.io/rogervila/http-catcher
 ```
 
 ### Local setup
