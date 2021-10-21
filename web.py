@@ -46,8 +46,10 @@ def catch(path):
     app.logger.debug(dumps(data, indent=2, sort_keys=True))
     # pylint: enable=no-member
 
+    status = environ.get('RESPONSE_STATUS')
+
     return Response(
         dumps(data),
-        status=environ.get('RESPONSE_STATUS') or 200,
+        status=int(status) if status is not None else 200,
         mimetype=environ.get('RESPONSE_MIME') or 'application/json'
     )
