@@ -1,0 +1,24 @@
+name: publish
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: docker-practice/actions-setup-docker@master
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - name: publish
+        run: | 
+          echo ${{ secrets.PAT }} > /tmp/pwd
+          cat /tmp/pwd | docker login ghcr.io  --username rogervila --password-stdin
+          rm /tmp/pwd
+          docker build -t ghcr.io/rogervila/http-catcher:${{ steps.get_version.outputs.VERSION }}
+          docker push ghcr.io/rogervila/http-catcher:${{ steps.get_version.outputs.VERSION }}
+          docker logout
